@@ -1,0 +1,22 @@
+Fixed-protocol replication, 2026-10-19
+
+Scope: rerun all four ablation conditions for amacGFP, cgreGFP, avGFP,
+using the prescribed request seeds 0, 1, 2, 3, 4. Full ProSIU calls the
+frozen released implementation. Each ablation uses its existing definition.
+The paper table uses the main experiment convergence setting only.
+Sixteen-step checkpoints remain available for the separate initialization study.
+
+Figure 2 repeats the original sparse-withdrawal protocol. The displayed methods
+are TARF, Entanglement, ProSIU. The underlying runner also saves its three
+reference conditions for verification. Balanced accuracy and prediction RMSE
+are evaluated in the existing substitution, position, and remote groups.
+
+Fixed across repeats: data, splits, requests, features, programs, model settings,
+baseline settings, subgroup definitions, scoring rules, and seed aggregation.
+Every prescribed seed enters the summaries. Main method source and main table
+remain unchanged. Training and batch evaluation execute on CUDA.
+
+GPU 0 handles seeds 0 and 1. GPU 1 handles seeds 2, 3, 4. Each independent
+process fits in one RTX 3090. Results are saved to a separate replication folder.
+The complete measurements are compared with the earlier run and independently
+recomputed from saved parameters, including the accepted full-model reference.

@@ -1,0 +1,24 @@
+Fixed case-study trace, 2026-10-20
+
+Use avGFP, request seed 0, trajectory 0, program bank 0, and the accepted release.
+The representative withdrawn record is the smallest identity in that request.
+These identities are fixed rather than chosen for a favorable measured outcome.
+Fit the released complete model and compare its metrics with the accepted main run.
+Replay the first four queries of the existing 64-trajectory, 128-candidate-pool
+closed-loop evaluation. Display the first three consecutive queries in the figure.
+Reveal each measured held-out interaction only after the corresponding selection.
+Keep all program proposals, histories, model scores, source measurements and checks.
+
+Display five stages: observed evidence, withdrawal/reconstruction, queries 1, 2, 3.
+Use the released assay's four measured sequences to calculate single-mutant effects
+and normalized pair interactions. The first two stages refer to one example within
+the original batch withdrawal. The batch size is stated explicitly.
+
+Render the public full-length GFP reference AF-P42212-F1, model version 6, as a common
+location template. This covers M233, which is unresolved in the inspected 1GFL
+crystal coordinates. Highlight mapped substitution sites and retain the same camera.
+These coordinate views locate mutations; the study does not compute mutant
+conformations. Structural mapping and coordinate source accompany the figure.
+
+Run fitting, candidate ranking and batch evaluation on CUDA. Figure annotations are
+deterministic descriptions of recorded events. They are not generated agent thoughts.

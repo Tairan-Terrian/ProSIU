@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "prosiu"
+version = "0.1.0"
+description = "Selective interaction unlearning for protein language agents"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {file = "LICENSE"}
+dependencies = [
+  "torch==2.6.0",
+  "transformers==4.45.2",
+  "tokenizers==0.20.3",
+  "huggingface-hub==0.36.2",
+  "safetensors==0.7.0",
+  "numpy==1.26.4",
+  "pandas==2.3.3",
+]
+
+[project.optional-dependencies]
+program-generation = ["lm-format-enforcer==0.10.6"]
+
+[project.scripts]
+prosiu = "prosiu.cli:main"
+
+[tool.setuptools]
+license-files = ["LICENSE", "NOTICE", "licenses/*.txt"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+prosiu = ["assets/*.json", "assets/configs/*.json"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"

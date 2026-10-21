@@ -1,0 +1,11 @@
+{
+  "proteingym_release": "v1.3",
+  "downloads": {
+    "DMS_ProteinGym_substitutions.zip": "https://marks.hms.harvard.edu/proteingym/ProteinGym_v1.3/DMS_ProteinGym_substitutions.zip",
+    "GFP_original_aminoacid.csv": "https://raw.githubusercontent.com/aequorea238/Orthologous_GFP_Fitness_Peaks/master/data/final_datasets/amacGFP_cgreGFP_ppluGFP2__final_aminoacid_genotypes_to_brightness.csv",
+    "avGFP_original.csv": "https://raw.githubusercontent.com/aequorea238/Orthologous_GFP_Fitness_Peaks/master/data/final_datasets/avGFP__rf_aminoacid_genotypes_to_brightness.csv"
+  },
+  "context_encoder": "facebook/esm2_t12_35M_UR50D",
+  "language_encoder": "facebook/esm2_t33_650M_UR50D",
+  "program_generator": "Qwen/Qwen2.5-3B-Instruct"
+}

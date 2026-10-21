@@ -1,0 +1,15 @@
+ProSIU
+Built with Qwen.
+
+The frozen numerical program library was generated with
+Qwen/Qwen2.5-3B-Instruct. Original prompts and outputs are included in
+src/prosiu/assets/program_generation.json. Qwen model weights and inference
+implementation are obtained separately from their upstream providers.
+
+Qwen is licensed under the Qwen RESEARCH LICENSE AGREEMENT,
+Copyright (c) Alibaba Cloud. All Rights Reserved.
+
+ProSIU uses public ESM-2 pretrained representations and published GFP assay
+data. Their sources and upstream license texts are listed in THIRD_PARTY.md.
+The root MIT license applies to ProSIU-authored source code and documentation.
+Third-party materials retain their respective terms.

@@ -1,0 +1,7 @@
+include README.md README_zh.md LICENSE NOTICE THIRD_PARTY.md
+include .gitignore .gitattributes
+recursive-include licenses *.txt
+recursive-include docs *.md
+recursive-include reference *.json *.md
+recursive-include scripts *.py *.sh
+recursive-include src/prosiu/assets *.json

@@ -1,0 +1,23 @@
+{
+  "assays": [
+    {
+      "assay": "amacGFP",
+      "source_rows_equal": true,
+      "requests_equal": true,
+      "context_max_difference": 0.0
+    },
+    {
+      "assay": "cgreGFP",
+      "source_rows_equal": true,
+      "requests_equal": true,
+      "context_max_difference": 0.0
+    },
+    {
+      "assay": "avGFP",
+      "source_rows_equal": true,
+      "requests_equal": true,
+      "context_max_difference": 0.0
+    }
+  ],
+  "language_embedding_max_difference": 0.0
+}

@@ -1,0 +1,50 @@
+Motivation diagnostics: evidence scope and cached program comparisons
+
+Fixed before execution:
+- All three main-task assays: amacGFP, cgreGFP, avGFP.
+- All five request seeds: 0, 1, 2, 3, 4.
+- Reuse the released train partition, measured single-mutant anchors, frozen
+  context features, and 16 language-generated program entries.
+- GPU 0 performs membership comparisons, distances, proposal execution, and
+  aggregation. CPU reads JSON and parses mutation identities.
+- These are evidence-graph and counterfactual program-replay diagnostics.
+  They measure knowledge removed and comparisons changed, respectively.
+
+Panel (a): collateral evidence removal
+- Withdrawal fractions are 5%, 10%, 15%, and 20% of training double mutants.
+- Generate nested position-pair requests with the main protocol's random
+  ordering and group signs. The 20% request equals the released main request.
+- The intended request withdraws only the selected double-mutant records.
+- The diagnostic component-wide rule also removes every valid single-mutant
+  anchor and remaining training combination containing an exact substitution
+  present in the withdrawn records.
+- Report the percentage of measured single-mutant anchors removed and the
+  percentage of retained training combinations removed. Wild type is excluded
+  from the single-mutant denominator. Equality of substitutions requires both
+  position and substituted amino acid.
+- Aggregate each metric across the three proteins within each request seed,
+  then report the mean and sample SD over five seeds.
+
+Panel (b): hidden history dependence
+- Use the released 20% withdrawal request.
+- Use 128 states and 64 retained candidates per state. Histories are prefixes
+  of the original 16-record histories, with lengths 2, 4, 8, and 16.
+- Candidate pools contain only retained training combinations and exclude all
+  original history records. Both replay conditions use identical pools.
+- Execute all 16 frozen programs once with the original history and once with
+  withdrawn records masked out of that history. Masking affects similarity
+  sums and density. Observed values, program weights, candidate pools, and
+  all retained history entries are identical between the two replays.
+- Enumerate all 120 pairs of program entries per state. The denominator is
+  comparisons with distinct original candidate endpoints and unequal measured
+  retained outcomes. A comparison changes if at least one selected candidate
+  differs after history withdrawal, including newly coincident endpoints.
+- Report changed comparisons as a percentage of that denominator. This
+  diagnostic quantifies stale comparison identities, rather than prediction
+  error or a sign reversal of the same candidate pair.
+- Save supplementary counts for affected provenance, proposal changes,
+  reversed outcome order, and collapsed comparisons.
+- Plot each protein's mean and sample SD over all five seeds.
+
+The main method, model parameters, main experiment, and existing results stay
+fixed. The diagnostic uses training records and their measured anchors.

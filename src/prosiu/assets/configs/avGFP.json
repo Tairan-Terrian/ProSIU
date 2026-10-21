@@ -1,0 +1,17 @@
+{
+  "classification": {
+    "features": "context",
+    "ridge": 0.001,
+    "preference": 0.0,
+    "classification": 1.0,
+    "threshold": 0.0
+  },
+  "preference": {
+    "features": "identity",
+    "ridge": 0.01,
+    "preference": 1.0,
+    "classification": 0.0,
+    "rank_temperature": 1.0,
+    "calibration": 0.0
+  }
+}

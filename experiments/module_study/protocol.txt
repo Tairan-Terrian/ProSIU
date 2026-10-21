@@ -1,0 +1,44 @@
+Module intervention study, 2026-10-20
+
+The released ProSIU implementation, accepted main results, input data, features,
+program library, assay settings, request seeds, evaluation pairs and metrics stay
+fixed. This study changes the experimental interventions, not the full method.
+Use amacGFP, cgreGFP and avGFP with request seeds 0,1,2,3,4. Aggregate every seed.
+
+ProSIU: call the released selective_forgetting implementation after constructing
+the original and rebuilt retained objectives exactly as in the accepted release.
+
+w/o EPS: replace the program-derived training-comparison block with the same
+number of uniformly sampled distinct record pairs. Preserve the separate uniform
+comparison block. Refit both original and retained models using this substitution.
+Use the same frozen program-derived evaluation pairs for all conditions. This
+isolates program-guided training comparisons with matched raw pair counts.
+
+w/o MPO: replace sign/preference objectives with robust regression of measured
+interaction effects. Preserve features, ridge, training records and selective
+update. Predict signs at zero and pair ordering with the regressed scores.
+
+w/o SEF: substitute ordinary record deletion followed by retained-data fine-tuning.
+Delete withdrawn raw measurements and every original comparison having a withdrawn
+endpoint. Preserve the surviving original comparisons without replaying their
+construction histories. Fit from the original parameters using the same optimizer,
+600-iteration cap and tolerances as the release. This removes the SEF supervision
+reconstruction and selective curvature/protection update together. It is a module
+replacement by generic record deletion, rather than an initialization ablation.
+
+Report all four main metrics on all assays, including ties or reversals. Record
+raw/effective pair counts, affected surviving histories, configurations, objective
+residuals and checkpoints. Full-model measurements must reproduce the accepted
+main table. The earlier initialization-only comparison remains a separate study.
+
+Figure 2: repeat the existing sparse-withdrawal requests, subgroup definitions,
+balanced accuracy and retained-reference RMSE. Keep TARF, Entanglement and their
+frozen settings. ProSIU calls the released fit_episode function directly. Fit one
+common retained reference for verification. Report all three subgroups and seeds.
+
+This protocol is written before this study's results. It replaces the earlier
+interventions after inspecting their scope and data-count confounds. It does not
+constitute a new independent confirmatory test on unseen data. Rankings are measured.
+
+CUDA performs all fitting and numerical evaluation. One RTX 3090 per process.
+The paper method and main table remain fixed. New exhibits are exported separately.
