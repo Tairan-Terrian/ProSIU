@@ -61,26 +61,16 @@ For downloaded model directories, use:
 prosiu features --encoder /path/to/esm2-35m --language-encoder /path/to/esm2-650m
 ```
 
-The default pipeline uses the bundled program library and fixed configurations. Qwen inference and a hyperparameter search are unnecessary for reproducing this table.
+The default pipeline uses the bundled program library and fixed configurations for reproducible runs.
 
-## Reference results
-
-All values are percentages, reported as **mean ± sample standard deviation over seeds 0–4**. Higher is better.
-
-| Dataset | CA ↑ | RA ↑ | TA ↑ | PA ↑ |
-|---|---:|---:|---:|---:|
-| amacGFP | 58.95±0.68 | 73.08±0.50 | 59.82±1.06 | 57.21±1.70 |
-| cgreGFP | 70.03±1.76 | 80.41±0.56 | 69.62±0.89 | 62.42±1.52 |
-| avGFP | 62.38±1.10 | 74.34±0.45 | 61.48±0.24 | 61.72±0.89 |
+## Evaluation
 
 - **CA:** clean interaction-sign balanced accuracy on withdrawn combinations.
 - **RA:** interaction-sign balanced accuracy on retained combinations.
 - **TA:** interaction-sign balanced accuracy on held-out combinations.
 - **PA:** interaction-preference accuracy for candidate pairs selected by the frozen programs.
 
-`reference/results.json` contains all 15 reference runs at full numerical precision. `prosiu verify` compares all 60 per-run metrics, using a stated tolerance of 0.1 percentage points. GPU kernels and library versions can affect near-tied predictions. The command writes every difference to `results/reproduction.json` and reports whether the tolerance is met. Verification leaves computed metrics unchanged.
-
-The release was validated on 18 October 2026 by downloading the raw inputs, rebuilding all features, and rerunning all 15 experiments in the [recorded environment](reference/environment.json). All 60 per-run metrics exactly matched the reference values. See the [reproduction report](reference/reproduction_report.json), [preprocessing comparison](reference/preprocessing_check.json), and [independent metric reconstruction](reference/evaluation.json).
+`prosiu evaluate` reconstructs the metrics from saved predictions. `prosiu summarize` aggregates runs, and `prosiu verify` compares them with the bundled reference records. Evaluation definitions are described in [the protocol](docs/protocol.md).
 
 ## Running subsets and parallel seeds
 
@@ -95,7 +85,7 @@ CUDA_VISIBLE_DEVICES=1 prosiu run --seeds 3 4
 prosiu summarize
 ```
 
-Independent seeds write to separate directories. Choose `--data-dir` and `--output-dir` to relocate data and results. Supply the same directories to subsequent stages. `summarize` and `verify` use the full three-protein, five-seed table.
+Independent seeds write to separate directories. Choose `--data-dir` and `--output-dir` to relocate data and results. Supply the same directories to subsequent stages. `summarize` and `verify` use the full three-protein, five-seed configuration.
 
 ## Outputs
 

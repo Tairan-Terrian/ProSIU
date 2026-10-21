@@ -1,6 +1,6 @@
 # ProSIU 复现说明
 
-本仓库提供已经确认结果的最终版 ProSIU，包含三个模块、三个 GFP 数据集的固定配置以及完整五个种子的参考结果。
+本仓库提供 ProSIU 的实现，包含三个方法模块、三个 GFP 数据集的固定配置以及完整运行流程。
 
 **Built with Qwen。** 固定数值程序库来自 Qwen2.5-3B-Instruct。原始提示词与生成结果随代码提供，正式复现直接使用这份程序库。
 
@@ -48,21 +48,11 @@ prosiu verify
 prosiu features --encoder /path/to/esm2-35m --language-encoder /path/to/esm2-650m
 ```
 
-## 参考结果
-
-所有指标以百分数报告，结果为五个种子的均值±样本标准差。
-
-| 数据集 | CA ↑ | RA ↑ | TA ↑ | PA ↑ |
-|---|---:|---:|---:|---:|
-| amacGFP | 58.95±0.68 | 73.08±0.50 | 59.82±1.06 | 57.21±1.70 |
-| cgreGFP | 70.03±1.76 | 80.41±0.56 | 69.62±0.89 | 62.42±1.52 |
-| avGFP | 62.38±1.10 | 74.34±0.45 | 61.48±0.24 | 61.72±0.89 |
+## 评测流程
 
 CA、RA、TA 分别是撤销组合、保留组合和测试组合上的交互符号平衡准确率。PA 是固定程序候选对的交互偏好准确率。
 
-`prosiu verify` 比较全部 60 个逐种子指标，默认容差为 0.1 个百分点，并将每项差异写入 `results/reproduction.json`。浮点计算和 GPU 库版本可能影响接近决策边界的样本。该命令保持实测数据原值。
-
-2026 年 10 月 18 日，本发布版在[记录的环境](reference/environment.json)中重新下载原始数据、重建全部特征并重跑 15 次实验，60 个逐种子指标与参考值完全一致。核对记录见[复现报告](reference/reproduction_report.json)、[预处理对照](reference/preprocessing_check.json)和[预测重算报告](reference/evaluation.json)。
+`prosiu evaluate` 从保存的预测重算指标，`prosiu summarize` 汇总各次运行，`prosiu verify` 与随代码提供的参考记录进行核对。完整评测定义见[实验协议](docs/protocol.md)。
 
 ## 单独运行与双卡并行
 
