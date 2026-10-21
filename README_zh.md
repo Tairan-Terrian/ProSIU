@@ -27,7 +27,6 @@ prosiu features
 prosiu run
 prosiu evaluate
 prosiu summarize
-prosiu verify
 ```
 
 各步依次完成：
@@ -38,7 +37,6 @@ prosiu verify
 4. 对三个蛋白分别运行种子 0、1、2、3、4，完成原模型训练、选择性遗忘和正式评测。
 5. 从保存的预测重新计算指标。
 6. 生成均值、样本标准差以及主表。
-7. 与 `reference/results.json` 中的 15 次参考运行逐项比较。
 
 环境安装后，也可以执行 `bash scripts/reproduce.sh`。已完成的准备阶段可以单独复用，后续直接从 `prosiu run` 开始。
 
@@ -52,7 +50,7 @@ prosiu features --encoder /path/to/esm2-35m --language-encoder /path/to/esm2-650
 
 CA、RA、TA 分别是撤销组合、保留组合和测试组合上的交互符号平衡准确率。PA 是固定程序候选对的交互偏好准确率。
 
-`prosiu evaluate` 从保存的预测重算指标，`prosiu summarize` 汇总各次运行，`prosiu verify` 与随代码提供的参考记录进行核对。完整评测定义见[实验协议](docs/protocol.md)。
+`prosiu evaluate` 从保存的预测重算指标，`prosiu summarize` 汇总已完成的运行并生成主实验表格。完整评测定义见[实验协议](docs/protocol.md)。
 
 ## 单独运行与双卡并行
 
@@ -87,4 +85,4 @@ CUDA_VISIBLE_DEVICES=1 prosiu run --seeds 3 4
 
 本版本使用已固定的配置，直接复现实验。具体数据访问规则、损失函数和撤销机制见 [docs/protocol.md](docs/protocol.md)。
 
-源代码包包含最终方法实现、固定程序库、参考指标及文档。数据、模型权重、本地环境和运行缓存通过 `.gitignore` 排除，使用公开下载流程获取。第三方资源来源和许可见 [THIRD_PARTY.md](THIRD_PARTY.md)。
+源代码包包含方法实现、固定配置、程序库及文档。使用者运行代码后在本地生成实验结果。`.gitignore` 排除生成的结果、下载数据、模型权重、本地环境和运行缓存。第三方资源来源和许可见 [THIRD_PARTY.md](THIRD_PARTY.md)。

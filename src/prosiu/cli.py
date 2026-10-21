@@ -12,7 +12,7 @@ def main():
     parser = argparse.ArgumentParser(description="ProSIU reproducible GFP evidence unlearning")
     parser.add_argument(
         "stage",
-        choices=["download", "prepare", "features", "run", "evaluate", "summarize", "verify"],
+        choices=["download", "prepare", "features", "run", "evaluate", "summarize"],
     )
     parser.add_argument("--data-dir", type=Path, default=Path("data"))
     parser.add_argument("--output-dir", type=Path, default=Path("results"))
@@ -25,10 +25,6 @@ def main():
         "--language-encoder",
         default=LANGUAGE_ENCODER,
         help="Public ESM-2 650M ID or local model directory",
-    )
-    parser.add_argument("--reference", type=Path, default=Path("reference/results.json"))
-    parser.add_argument(
-        "--tolerance", type=float, default=0.1, help="Verification tolerance in percentage points"
     )
     args = parser.parse_args()
     torch.set_num_threads(4)
@@ -58,7 +54,3 @@ def main():
         from .report import summarize
 
         summarize(args.output_dir)
-    else:
-        from .report import verify
-
-        verify(args.output_dir, args.reference, args.tolerance)

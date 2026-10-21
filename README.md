@@ -45,10 +45,9 @@ prosiu features
 # 4. Train, withdraw evidence, and evaluate all 3 proteins × 5 seeds.
 prosiu run
 
-# 5. Independently recompute metrics, summarize, and compare with the reference.
+# 5. Independently recompute metrics and generate the main-experiment table.
 prosiu evaluate
 prosiu summarize
-prosiu verify
 ```
 
 The complete sequence is also available as `bash scripts/reproduce.sh` after installation. Each command is a separate stage, so prepared data and features can be reused across runs.
@@ -70,7 +69,7 @@ The default pipeline uses the bundled program library and fixed configurations f
 - **TA:** interaction-sign balanced accuracy on held-out combinations.
 - **PA:** interaction-preference accuracy for candidate pairs selected by the frozen programs.
 
-`prosiu evaluate` reconstructs the metrics from saved predictions. `prosiu summarize` aggregates runs, and `prosiu verify` compares them with the bundled reference records. Evaluation definitions are described in [the protocol](docs/protocol.md).
+`prosiu evaluate` reconstructs the metrics from saved predictions. `prosiu summarize` aggregates the completed runs and generates the main-experiment table. Evaluation definitions are described in [the protocol](docs/protocol.md).
 
 ## Running subsets and parallel seeds
 
@@ -85,7 +84,7 @@ CUDA_VISIBLE_DEVICES=1 prosiu run --seeds 3 4
 prosiu summarize
 ```
 
-Independent seeds write to separate directories. Choose `--data-dir` and `--output-dir` to relocate data and results. Supply the same directories to subsequent stages. `summarize` and `verify` use the full three-protein, five-seed configuration.
+Independent seeds write to separate directories. Choose `--data-dir` and `--output-dir` to relocate data and results. Supply the same directories to subsequent stages. `summarize` uses the full three-protein, five-seed configuration.
 
 ## Outputs
 
@@ -103,7 +102,6 @@ results/
   summary.json                 Full-precision mean and sample standard deviation
   summary.csv                  Compact numerical summary
   table.md                     Display table
-  reproduction.json            Per-run differences from the released reference
 ```
 
 The retained-reference fit is an optimization diagnostic. Reported predictions come from the model obtained by unlearning the original model.
@@ -122,13 +120,12 @@ src/prosiu/
   selective_epistasis_forgetting.py
   experiment.py                Training, unlearning, and evaluation
   metrics.py                   CA, RA, TA, PA
-  report.py                    Aggregation and reference comparison
+  report.py                    Metric aggregation and table generation
   cli.py                       Public command-line interface
-reference/                     ProSIU reference metrics and environment
 docs/protocol.md                Data access, objectives, and benchmark definitions
 ```
 
-The repository contains the final ProSIU pipeline. Data downloads, encoder weights, generated caches, and local environments are covered by `.gitignore` and remain outside the source distribution.
+The repository contains the ProSIU implementation, fixed configurations, program library, and documentation. Running the pipeline generates results locally. `.gitignore` excludes generated results, downloaded data, encoder weights, caches, and local environments.
 
 ## Program-generation provenance
 

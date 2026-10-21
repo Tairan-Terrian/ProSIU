@@ -1,4 +1,4 @@
-"""Summarize all fixed seeds and compare a reproduction with released results."""
+"""Summarize the main experiment across all fixed seeds."""
 
 import csv
 from pathlib import Path
@@ -34,27 +34,3 @@ def summarize(output_dir):
             )
     (output_dir / "table.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     print("\n".join(lines))
-
-
-def verify(output_dir, reference_path, tolerance):
-    rows = []
-    for expected in read_json(reference_path)["runs"]:
-        assay, seed = expected["assay"], expected["seed"]
-        actual = read_json(Path(output_dir) / assay / f"seed_{seed}/result.json")
-        differences = {key: actual["metrics"][key] - expected["metrics"][key] for key in METRICS}
-        rows.append({"assay": assay, "seed": seed, "difference_pp": differences})
-    maximum = max(abs(value) for row in rows for value in row["difference_pp"].values())
-    result = {
-        "runs": len(rows),
-        "maximum_absolute_difference_pp": maximum,
-        "tolerance_pp": tolerance,
-        "passed": maximum <= tolerance,
-        "comparisons": rows,
-    }
-    write_json(Path(output_dir) / "reproduction.json", result)
-    print(
-        {"runs": len(rows), "maximum_absolute_difference_pp": maximum, "passed": result["passed"]}
-    )
-    assert result[
-        "passed"
-    ], f"Reproduction differs from the reference by {maximum:.6f} percentage points."

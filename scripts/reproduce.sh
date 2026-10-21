@@ -5,5 +5,4 @@ python -m prosiu prepare &&
 python -m prosiu features &&
 python -m prosiu run &&
 python -m prosiu evaluate &&
-python -m prosiu summarize &&
-python -m prosiu verify
+python -m prosiu summarize

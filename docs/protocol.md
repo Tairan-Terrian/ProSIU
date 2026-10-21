@@ -91,7 +91,7 @@ When the retained neighborhood is empty, its empirical second-moment contributio
 
 The checkpoint stores original, unlearned, and retained-reference parameters. Diagnostics report the protection constraint residual, retained gradient, parameter distance, objective gap, and maximum prediction difference to the retained-reference fit.
 
-## Metrics and reference comparison
+## Metrics and aggregation
 
 CA, RA, and TA use the same balanced-accuracy definition:
 
@@ -101,4 +101,4 @@ The clean interaction target is positive when $\epsilon>0$. The classification s
 
 PA compares the preference-head ordering of the two selected candidates with the ordering of their clean measured interactions. A predicted tie receives half credit. A measured tie is excluded. All metrics retain their natural percentage scale.
 
-The summary uses every preset seed and the sample standard deviation. `evaluate` reconstructs metrics from saved predictions. `verify` compares the complete 15-run reproduction with the reference values and records every difference. The release uses a 0.1-percentage-point per-run comparison tolerance.
+The summary uses every preset seed and the sample standard deviation. `evaluate` reconstructs metrics from saved predictions. `summarize` writes the per-protein metric summaries and main-experiment table from the user's completed runs.
