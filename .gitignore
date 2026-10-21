@@ -11,3 +11,4 @@ results/
 .DS_Store
 .env
 .env.*
+/experiments/
