@@ -12,7 +12,7 @@ The three components are:
 - **Mutation Preference Optimization:** regularized interaction-sign and program-preference heads use valid single-mutation anchors and frozen protein representations.
 - **Selective Epistasis Forgetting:** reconstruct retained supervision, compute a protected curvature correction, and refine both heads on the retained objective.
 
-[Protocol and implementation](docs/protocol.md) · [Third-party attribution](THIRD_PARTY.md)
+[Protocol and implementation](docs/protocol.md) 
 
 ## Installation
 
